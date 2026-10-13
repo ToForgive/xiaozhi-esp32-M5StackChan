@@ -96,6 +96,21 @@ class ReleaseTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     release.verify_assets(self.manifest(), Path(folder))
 
+    def test_k151_package_requires_its_isolated_project_identity(self):
+        manifest = self.manifest()
+        manifest["variants"][0]["full_name"] = "m5stack-stackchan-k151"
+        manifest["variants"][0]["target"] = "esp32s3"
+        with tempfile.TemporaryDirectory() as folder:
+            package = Path(folder) / "v2.5.2_m5stack-stackchan-k151.zip"
+            for project, valid in (("xiaozhi", False), ("xiaozhi-k151", True)):
+                with zipfile.ZipFile(package, "w") as archive:
+                    archive.writestr("merged-binary.bin", self.image(chip=9, project=project))
+                if valid:
+                    self.assertIn(package.name, release.verify_assets(manifest, Path(folder)))
+                else:
+                    with self.assertRaisesRegex(ValueError, "project mismatch"):
+                        release.verify_assets(manifest, Path(folder))
+
     def test_missing_and_truncated_app_partitions_fail(self):
         missing = self.image()
         missing[0x8000:0x8002] = bytes(2)

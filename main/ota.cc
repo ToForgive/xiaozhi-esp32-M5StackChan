@@ -54,6 +54,10 @@ Ota::~Ota() {
 }
 
 std::string Ota::GetCheckVersionUrl() {
+    auto board_url = Board::GetInstance().GetConfigServiceUrl();
+    if (!board_url.empty()) {
+        return board_url;
+    }
     Settings settings("wifi", false);
     std::string url = settings.GetString("ota_url");
     if (url.empty()) {
@@ -253,6 +257,8 @@ NetworkResult<> Ota::CheckVersion() {
         ESP_LOGW(TAG, "No firmware section found!");
     }
 
+    has_new_version_ = has_new_version_ && Board::GetInstance().IsFirmwareUpdateAllowed();
+
     cJSON_Delete(root);
     return {};
 }
@@ -278,6 +284,10 @@ void Ota::MarkCurrentVersionValid() {
 }
 
 bool Ota::Upgrade(const std::string& firmware_url, std::function<void(int progress, size_t speed)> callback) {
+    if (!Board::GetInstance().IsFirmwareUpdateAllowed()) {
+        ESP_LOGW(TAG, "Firmware update disabled by board policy");
+        return false;
+    }
     ESP_LOGI(TAG, "Upgrading firmware from %s", firmware_url.c_str());
     esp_ota_handle_t update_handle = 0;
     auto update_partition = esp_ota_get_next_update_partition(NULL);
@@ -347,10 +357,21 @@ bool Ota::Upgrade(const std::string& firmware_url, std::function<void(int progre
         }
 
         if (!image_header_checked) {
-            image_header.append(buffer, buffer_offset);
+            // buffer_offset includes earlier short reads; append only the newly received bytes.
+            image_header.append(buffer + buffer_offset - n, static_cast<size_t>(n));
             if (image_header.size() >= sizeof(esp_image_header_t) + sizeof(esp_image_segment_header_t) + sizeof(esp_app_desc_t)) {
                 esp_app_desc_t new_app_info;
                 memcpy(&new_app_info, image_header.data() + sizeof(esp_image_header_t) + sizeof(esp_image_segment_header_t), sizeof(esp_app_desc_t));
+
+                const std::string project_name(
+                    new_app_info.project_name,
+                    strnlen(new_app_info.project_name, sizeof(new_app_info.project_name)));
+                if (!Board::GetInstance().IsFirmwareImageCompatible(project_name)) {
+                    ESP_LOGE(TAG, "Firmware project '%s' is incompatible with this board",
+                             project_name.c_str());
+                    heap_caps_free(buffer);
+                    return false;
+                }
 
                 if (esp_ota_begin(update_partition, OTA_WITH_SEQUENTIAL_WRITES, &update_handle)) {
                     esp_ota_abort(update_handle);

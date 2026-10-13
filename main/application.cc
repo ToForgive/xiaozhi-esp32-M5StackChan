@@ -1207,6 +1207,10 @@ void Application::Reboot() {
 
 bool Application::UpgradeFirmware(const std::string& url, const std::string& version) {
     auto& board = Board::GetInstance();
+    if (!board.IsFirmwareUpdateAllowed()) {
+        ESP_LOGW(TAG, "Firmware update disabled by board policy");
+        return false;
+    }
     auto display = board.GetDisplay();
 
     std::string upgrade_url = url;

@@ -1,0 +1,197 @@
+Processing language: zh-CN
+Input file path: /workspace/k151-native-verified/generated/assets/locales/zh-CN/language.json
+Output file path: /workspace/k151-native-verified/generated/assets/lang_config.h
+Loaded base language en-US with 52 strings
+Language zh-CN string statistics:
+  - Base language (en-US): 52 strings
+  - User language: 52 strings
+  - Total: 52 strings
+Language zh-CN sound statistics:
+  - Base language (en-US): 0 sounds
+  - User language: 0 sounds
+  - Common sounds: 0 sounds
+Successfully generated language config file: /workspace/k151-native-verified/generated/assets/lang_config.h
+-- Minimal build - ON
+-- git rev-parse returned 'fatal: not a git repository (or any of the parent directories): .git'
+-- Could not use 'git describe' to determine PROJECT_VER.
+-- Building ESP-IDF components for target esp32s3
+"idf_component.yml" file was found for components:
+	/workspace/lvgl-reference
+However, the component manager is not enabled.
+-- KCONFIG_REPORT_VERBOSITY not set, using default
+-- Project sdkconfig file /workspace/k151-native-verified/sdkconfig
+NOTE: /workspace/esp-idf/components/bootloader/Kconfig.projbuild:383: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: /workspace/esp-idf/components/bootloader/Kconfig.projbuild:423: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: /workspace/esp-idf/components/esp_hw_support/./lowpower/port/esp32p4/Kconfig.p4_rev3_mspi_workaround:6: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: /workspace/esp-idf/components/esp_mm/Kconfig:20: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+NOTE: /workspace/esp-idf/components/esp_system/./port/soc/esp32s3/Kconfig.memory:21: Deprecation notice: hex literal '0' without '0x' prefix detected. In the next major version, hex literals will be required to have a '0x' prefix.
+Loading defaults file /workspace/k151-native-verified/sdkconfig.defaults...
+NOTE: Kconfig parser version: 1
+NOTE: Kconfig defaults policy: use sdkconfig
+NOTE: Status: Finished successfully
+-- Compiler supported targets: xtensa-esp-elf
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- App "k151-native-check" version: 1
+-- Setting up mbedtls configuration
+-- Linkage type is PUBLIC
+-- Adding linker script /workspace/esp-idf/components/esp_hal_wdt/esp32s3/rom.wdt.ld
+-- Adding linker script /workspace/esp-idf/components/esp_system/ld/esp32s3/memory.ld.in
+--   -> Preprocessing .in script: /workspace/esp-idf/components/esp_system/ld/esp32s3/memory.ld.in
+-- Adding linker script /workspace/esp-idf/components/esp_system/ld/esp32s3/sections.ld.in
+--   -> Preprocessing .in script: /workspace/esp-idf/components/esp_system/ld/esp32s3/sections.ld.in
+--   -> Applying ldgen processing: /workspace/k151-native-verified/build/esp-idf/esp_system/ld/sections.ld.in
+-- Adding linker script /workspace/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ld
+-- Adding linker script /workspace/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.api.ld
+-- Adding linker script /workspace/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.bt_funcs.ld
+-- Adding linker script /workspace/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.libgcc.ld
+-- Adding linker script /workspace/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.version.ld
+-- Adding linker script /workspace/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ble_master.ld
+-- Adding linker script /workspace/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ble_50.ld
+-- Adding linker script /workspace/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ble_smp.ld
+-- Adding linker script /workspace/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ble_dtm.ld
+-- Adding linker script /workspace/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ble_test.ld
+-- Adding linker script /workspace/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.ble_scan.ld
+-- Adding linker script /workspace/esp-idf/components/esp_rom/esp32s3/ld/esp32s3.rom.libc.ld
+-- Adding linker script /workspace/esp-idf/components/soc/esp32s3/ld/esp32s3.peripherals.ld
+-- Adding linker script /workspace/esp-idf/components/esp_hal_regi2c/esp32s3/rom.regi2c.ld
+CMake Warning at /workspace/esp-idf/tools/cmake/component_validation.cmake:106 (message):
+  Private include directory
+  '/workspace/esp-idf/components/esp_wifi/wifi_apps/roaming_app/include'
+  belongs to component esp_wifi but is being used by component
+  wpa_supplicant.  It is recommended to define the component dependency for
+  wpa_supplicant on the component esp_wifi, i.e.  'idf_component_register(...
+  PRIV_REQUIRES esp_wifi)' in the CMakeLists.txt of wpa_supplicant, and
+  specify the included directory as idf_component_register(...
+  PRIV_INCLUDE_DIRS <dir relative to component>) in the CMakeLists.txt of
+  component esp_wifi.
+Call Stack (most recent call first):
+  /workspace/esp-idf/tools/cmake/component_validation.cmake:130 (__component_validation_check_include_dirs)
+  /workspace/esp-idf/CMakeLists.txt:356 (__component_validation_run_checks)
+
+
+CMake Warning at /workspace/esp-idf/tools/cmake/component_validation.cmake:106 (message):
+  Private include directory
+  '/workspace/esp-idf/components/esp_wifi/wifi_apps/roaming_app/src' belongs
+  to component esp_wifi but is being used by component wpa_supplicant.  It is
+  recommended to define the component dependency for wpa_supplicant on the
+  component esp_wifi, i.e.  'idf_component_register(...  PRIV_REQUIRES
+  esp_wifi)' in the CMakeLists.txt of wpa_supplicant, and specify the
+  included directory as idf_component_register(...  PRIV_INCLUDE_DIRS <dir
+  relative to component>) in the CMakeLists.txt of component esp_wifi.
+Call Stack (most recent call first):
+  /workspace/esp-idf/tools/cmake/component_validation.cmake:130 (__component_validation_check_include_dirs)
+  /workspace/esp-idf/CMakeLists.txt:356 (__component_validation_run_checks)
+
+
+CMake Warning at /workspace/esp-idf/tools/cmake/component_validation.cmake:106 (message):
+  Private include directory
+  '/workspace/esp-idf/components/esp_wifi/wifi_apps/include/apps_private'
+  belongs to component esp_wifi but is being used by component
+  wpa_supplicant.  It is recommended to define the component dependency for
+  wpa_supplicant on the component esp_wifi, i.e.  'idf_component_register(...
+  PRIV_REQUIRES esp_wifi)' in the CMakeLists.txt of wpa_supplicant, and
+  specify the included directory as idf_component_register(...
+  PRIV_INCLUDE_DIRS <dir relative to component>) in the CMakeLists.txt of
+  component esp_wifi.
+Call Stack (most recent call first):
+  /workspace/esp-idf/tools/cmake/component_validation.cmake:130 (__component_validation_check_include_dirs)
+  /workspace/esp-idf/CMakeLists.txt:356 (__component_validation_run_checks)
+
+
+CMake Warning at /workspace/esp-idf/tools/cmake/component_validation.cmake:106 (message):
+  Private include directory
+  '/workspace/esp-idf/components/wpa_supplicant/src' belongs to component
+  wpa_supplicant but is being used by component esp_wifi.  It is recommended
+  to define the component dependency for esp_wifi on the component
+  wpa_supplicant, i.e.  'idf_component_register(...  PRIV_REQUIRES
+  wpa_supplicant)' in the CMakeLists.txt of esp_wifi, and specify the
+  included directory as idf_component_register(...  PRIV_INCLUDE_DIRS <dir
+  relative to component>) in the CMakeLists.txt of component wpa_supplicant.
+Call Stack (most recent call first):
+  /workspace/esp-idf/tools/cmake/component_validation.cmake:130 (__component_validation_check_include_dirs)
+  /workspace/esp-idf/CMakeLists.txt:356 (__component_validation_run_checks)
+
+
+CMake Warning at /workspace/esp-idf/tools/cmake/component_validation.cmake:106 (message):
+  Private include directory
+  '/workspace/esp-idf/components/wpa_supplicant/esp_supplicant/src' belongs
+  to component wpa_supplicant but is being used by component esp_wifi.  It is
+  recommended to define the component dependency for esp_wifi on the
+  component wpa_supplicant, i.e.  'idf_component_register(...  PRIV_REQUIRES
+  wpa_supplicant)' in the CMakeLists.txt of esp_wifi, and specify the
+  included directory as idf_component_register(...  PRIV_INCLUDE_DIRS <dir
+  relative to component>) in the CMakeLists.txt of component wpa_supplicant.
+Call Stack (most recent call first):
+  /workspace/esp-idf/tools/cmake/component_validation.cmake:130 (__component_validation_check_include_dirs)
+  /workspace/esp-idf/CMakeLists.txt:356 (__component_validation_run_checks)
+
+
+-- Components: app_update bootloader bootloader_support cxx efuse esp_app_format esp_blockdev esp_bootloader_format esp_coex esp_common esp_driver_bitscrambler esp_driver_cam esp_driver_dma esp_driver_gpio esp_driver_i2c esp_driver_i2s esp_driver_isp esp_driver_parlio esp_driver_rmt esp_driver_spi esp_driver_uart esp_driver_usb_serial_jtag esp_event esp_hal_ana_conv esp_hal_cam esp_hal_clock esp_hal_dma esp_hal_gpio esp_hal_gpspi esp_hal_i2c esp_hal_i2s esp_hal_lcd esp_hal_mspi esp_hal_parlio esp_hal_pmu esp_hal_regi2c esp_hal_rmt esp_hal_rtc_timer esp_hal_security esp_hal_systimer esp_hal_timg esp_hal_touch_sens esp_hal_uart esp_hal_usb esp_hal_wdt esp_hw_support esp_lcd esp_libc esp_mm esp_netif esp_netif_stack esp_partition esp_phy esp_pm esp_psram esp_ringbuf esp_rom esp_security esp_stdio esp_system esp_timer esp_usb_cdc_rom_console esp_wifi esptool_py freertos hal heap log lvgl-reference lwip main mbedtls nvs_flash nvs_sec_provider partition_table pthread soc spi_flash vfs wpa_supplicant xtensa
+-- Component paths: /workspace/esp-idf/components/app_update /workspace/esp-idf/components/bootloader /workspace/esp-idf/components/bootloader_support /workspace/esp-idf/components/cxx /workspace/esp-idf/components/efuse /workspace/esp-idf/components/esp_app_format /workspace/esp-idf/components/esp_blockdev /workspace/esp-idf/components/esp_bootloader_format /workspace/esp-idf/components/esp_coex /workspace/esp-idf/components/esp_common /workspace/esp-idf/components/esp_driver_bitscrambler /workspace/esp-idf/components/esp_driver_cam /workspace/esp-idf/components/esp_driver_dma /workspace/esp-idf/components/esp_driver_gpio /workspace/esp-idf/components/esp_driver_i2c /workspace/esp-idf/components/esp_driver_i2s /workspace/esp-idf/components/esp_driver_isp /workspace/esp-idf/components/esp_driver_parlio /workspace/esp-idf/components/esp_driver_rmt /workspace/esp-idf/components/esp_driver_spi /workspace/esp-idf/components/esp_driver_uart /workspace/esp-idf/components/esp_driver_usb_serial_jtag /workspace/esp-idf/components/esp_event /workspace/esp-idf/components/esp_hal_ana_conv /workspace/esp-idf/components/esp_hal_cam /workspace/esp-idf/components/esp_hal_clock /workspace/esp-idf/components/esp_hal_dma /workspace/esp-idf/components/esp_hal_gpio /workspace/esp-idf/components/esp_hal_gpspi /workspace/esp-idf/components/esp_hal_i2c /workspace/esp-idf/components/esp_hal_i2s /workspace/esp-idf/components/esp_hal_lcd /workspace/esp-idf/components/esp_hal_mspi /workspace/esp-idf/components/esp_hal_parlio /workspace/esp-idf/components/esp_hal_pmu /workspace/esp-idf/components/esp_hal_regi2c /workspace/esp-idf/components/esp_hal_rmt /workspace/esp-idf/components/esp_hal_rtc_timer /workspace/esp-idf/components/esp_hal_security /workspace/esp-idf/components/esp_hal_systimer /workspace/esp-idf/components/esp_hal_timg /workspace/esp-idf/components/esp_hal_touch_sens /workspace/esp-idf/components/esp_hal_uart /workspace/esp-idf/components/esp_hal_usb /workspace/esp-idf/components/esp_hal_wdt /workspace/esp-idf/components/esp_hw_support /workspace/esp-idf/components/esp_lcd /workspace/esp-idf/components/esp_libc /workspace/esp-idf/components/esp_mm /workspace/esp-idf/components/esp_netif /workspace/esp-idf/components/esp_netif_stack /workspace/esp-idf/components/esp_partition /workspace/esp-idf/components/esp_phy /workspace/esp-idf/components/esp_pm /workspace/esp-idf/components/esp_psram /workspace/esp-idf/components/esp_ringbuf /workspace/esp-idf/components/esp_rom /workspace/esp-idf/components/esp_security /workspace/esp-idf/components/esp_stdio /workspace/esp-idf/components/esp_system /workspace/esp-idf/components/esp_timer /workspace/esp-idf/components/esp_usb_cdc_rom_console /workspace/esp-idf/components/esp_wifi /workspace/esp-idf/components/esptool_py /workspace/esp-idf/components/freertos /workspace/esp-idf/components/hal /workspace/esp-idf/components/heap /workspace/esp-idf/components/log /workspace/lvgl-reference /workspace/esp-idf/components/lwip /workspace/k151-native-verified/main /workspace/esp-idf/components/mbedtls /workspace/esp-idf/components/nvs_flash /workspace/esp-idf/components/nvs_sec_provider /workspace/esp-idf/components/partition_table /workspace/esp-idf/components/pthread /workspace/esp-idf/components/soc /workspace/esp-idf/components/spi_flash /workspace/esp-idf/components/vfs /workspace/esp-idf/components/wpa_supplicant /workspace/esp-idf/components/xtensa
+-- Configuring done (8.9s)
+-- Generating done (0.6s)
+-- Build files have been written to: /workspace/k151-native-verified/build
+Executing action: reconfigure
+Running cmake in directory /workspace/k151-native-verified/build
+Executing "cmake -G Ninja -B /workspace/k151-native-verified/build -DPYTHON_DEPS_CHECKED=1 -DPYTHON=/workspace/idf-tools/python_env/idf6.1_py3.12_env/bin/python -DESP_PLATFORM=1 -DIDF_TARGET=esp32s3 -DCCACHE_ENABLE=False /workspace/k151-native-verified"...
+[1/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/hal/drivers/FTServo_Arduino/src/SCSCL.cpp.obj
+[2/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/hal/drivers/FTServo_Arduino/src/SCSerial.cpp.obj
+[3/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/hal/drivers/FTServo_Arduino/src/SCS.cpp.obj
+[4/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/hal/drivers/FTServo_Arduino/src/HLSCL.cpp.obj
+[5/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/hal/drivers/PCF8563_Class/PCF8563_Class.cpp.obj
+[6/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/hal/drivers/FTServo_Arduino/src/SMS_STS.cpp.obj
+[7/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/hal/drivers/PY32IOExpander_Class/PY32IOExpander_Class.cpp.obj
+[8/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/hal/drivers/Si12T/Si12T.cpp.obj
+[9/53] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/hal/drivers/bmi270/BMI270_SensorAPI/bmi270.c.obj
+[10/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/hal/drivers/bmi270/bmi270.cpp.obj
+[11/53] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/hal/drivers/bmi270/BMI270_SensorAPI/bmi2.c.obj
+[12/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/addons/neon_light/neon_light.cpp.obj
+[13/53] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/avatar/decorators/assets/decorator_angry.c.obj
+[14/53] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/avatar/decorators/assets/decorator_dizzy.c.obj
+[15/53] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/avatar/decorators/assets/decorator_heart.c.obj
+[16/53] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/avatar/decorators/assets/decorator_shy.c.obj
+[17/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/hal/hal_servo.cpp.obj
+[18/53] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/avatar/decorators/assets/decorator_sweat.c.obj
+[19/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/avatar/decorators/angry.cpp.obj
+[20/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/avatar/decorators/dizzy.cpp.obj
+[21/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/hal/hal.cc.obj
+[22/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/avatar/decorators/heart.cpp.obj
+[23/53] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/avatar/skins/default/assets/default_bubble_arrow.c.obj
+[24/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/avatar/skins/default/default.cpp.obj
+[25/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/avatar/decorators/sweat.cpp.obj
+[26/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/avatar/decorators/shy.cpp.obj
+[27/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/avatar/skins/default/eyes.cpp.obj
+[28/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/avatar/skins/default/mouth.cpp.obj
+[29/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/motion/motion_math.cpp.obj
+[30/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/avatar/skins/default/speech_bubble.cpp.obj
+[31/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/motion/motion.cpp.obj
+[32/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/vendor/uitk/core/animation/animate/animate.cpp.obj
+[33/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/vendor/uitk/core/animation/animate_value/animate_value.cpp.obj
+[34/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan/motion/servo.cpp.obj
+[35/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/vendor/uitk/core/animation/generators/easing/easing.cpp.obj
+[36/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/vendor/uitk/core/animation/animate_vector/animate_vector2.cpp.obj
+[37/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/vendor/uitk/core/animation/animate_vector/animate_vector4.cpp.obj
+[38/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/vendor/uitk/core/animation/generators/spring/spring.cpp.obj
+[39/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/vendor/uitk/core/easing/cubic_bezier/cubic_bezier.cpp.obj
+[40/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/vendor/uitk/core/color/color.cpp.obj
+[41/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/vendor/uitk/core/easing/ease.cpp.obj
+[42/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/vendor/uitk/core/animation/sequence/animate_sequence.cpp.obj
+[43/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/vendor/uitk/widget/select_menu/smooth_options.cpp.obj
+[44/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/vendor/uitk/core/hal/hal.cpp.obj
+[45/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/vendor/uitk/widget/select_menu/smooth_selector.cpp.obj
+[46/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/k151_ir.cc.obj
+[47/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/cores3_audio_codec.cc.obj
+[48/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/stackchan_k151.cc.obj
+[49/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/k151_application.cc.obj
+[50/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/ota.cc.obj
+[51/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/main.cc.obj
+[52/53] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/workspace/xiaozhi-esp32-M5StackChan/main/boards/m5stack/stackchan-k151/k151_display.cc.obj
+[53/53] Linking C static library esp-idf/main/libmain.a
+Compiled archive: /workspace/k151-native-verified/build/esp-idf/main/libmain.a (NOT a linked firmware)

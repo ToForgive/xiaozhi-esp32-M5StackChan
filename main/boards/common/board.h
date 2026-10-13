@@ -65,6 +65,14 @@ public:
     }
 
     virtual ~Board() = default;
+    // Empty keeps the normal persisted/default configuration service selection.
+    virtual std::string GetConfigServiceUrl() const { return {}; }
+    // Board-specific update policy; activation/configuration requests remain available.
+    virtual bool IsFirmwareUpdateAllowed() const { return true; }
+    virtual bool IsFirmwareImageCompatible(const std::string& project_name) const {
+        (void)project_name;
+        return true;
+    }
     virtual std::string GetBoardType() = 0;
     virtual std::string GetUuid() { return uuid_; }
     virtual Backlight* GetBacklight() { return nullptr; }

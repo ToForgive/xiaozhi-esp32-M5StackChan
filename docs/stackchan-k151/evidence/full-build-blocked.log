@@ -1,0 +1,95 @@
+Checking "python3" ...
+Python 3.12.14
+"python3" has been detected
+Activating ESP-IDF 6.1
+Setting IDF_PATH to '/workspace/esp-idf'.
+* Checking python version ... 3.12.14
+* Checking python dependencies ... OK
+* Deactivating the current ESP-IDF environment (if any) ... OK
+* Establishing a new ESP-IDF environment ... OK
+* Identifying shell ... bash
+* Detecting outdated tools in system ... OK - no outdated tools found
+* Shell completion ... Autocompletion code generated
+
+Done! You can now compile ESP-IDF projects.
+Go to the project directory and run:
+
+  idf.py build
+[WARN] Ambiguous board config for lilygo/t-cameraplus-s3 (target=esp32s3), target-matched candidates=['CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_0_V1_1', 'CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_2'], selecting first: CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_0_V1_1
+-- Found Git: /usr/local/bin/git (found version "2.52.0")
+-- Minimal build - ON
+-- The C compiler identification is GNU 15.2.0
+-- The CXX compiler identification is GNU 15.2.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /workspace/idf-tools/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /workspace/idf-tools/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /workspace/idf-tools/tools/xtensa-esp-elf/esp-15.2.0_20251204/xtensa-esp-elf/bin/xtensa-esp32s3-elf-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Building ESP-IDF components for target esp32s3
+NOTE: Dependencies lock doesn't exist, solving dependencies.
+NOTE: Skipping optional dependency: espressif/ip101
+NOTE: Skipping optional dependency: espressif/esp_lcd_touch_cst9220
+NOTE: Skipping optional dependency: espressif/esp_lcd_jd9365
+NOTE: Skipping optional dependency: waveshare/esp_lcd_hx8394
+NOTE: Skipping optional dependency: waveshare/esp_lcd_st7703
+NOTE: Skipping optional dependency: espressif/esp_lcd_ili9881c
+NOTE: Skipping optional dependency: espressif/esp_lcd_ek79007
+NOTE: Skipping optional dependency: espressif/esp_hosted
+NOTE: Skipping optional dependency: espressif/esp_wifi_remote
+NOTE: Skipping optional dependency: espfriends/servo_dog_ctrl
+NOTE: Skipping optional dependency: espressif/touch_slider_sensor
+NOTE: Skipping optional dependency: espressif/touch_button_sensor
+NOTE: Skipping optional dependency: kevincoooool/esp_lcd_st7102
+CMake Error at /workspace/esp-idf/tools/cmake/build.cmake:707 (message):
+  ERROR: Cannot establish a connection to the component registry.  Are you
+  connected to the internet?
+
+  URL: https://components-file.espressif.com/components/78/esp-ml307.json
+
+Call Stack (most recent call first):
+  /workspace/esp-idf/tools/cmake/project.cmake:868 (idf_build_process)
+  CMakeLists.txt:14 (project)
+
+
+-- Configuring incomplete, errors occurred!
+cmake failed with exit code 1, output of the command is in the /workspace/xiaozhi-esp32-M5StackChan/build/log/idf_py_stderr_output_3157 and /workspace/xiaozhi-esp32-M5StackChan/build/log/idf_py_stdout_output_3157
+Executing action: reconfigure
+Running cmake in directory /workspace/xiaozhi-esp32-M5StackChan/build
+Executing "cmake -G Ninja -B /workspace/xiaozhi-esp32-M5StackChan/build -DPYTHON_DEPS_CHECKED=1 -DPYTHON=/workspace/idf-tools/python_env/idf6.1_py3.12_env/bin/python -DESP_PLATFORM=1 -DIDF_TARGET=esp32s3 -DSDKCONFIG_DEFAULTS=sdkconfig.defaults;build/xiaozhi-build.sdkconfig.defaults -DBOARD_NAME=m5stack-stackchan-k151 -DCCACHE_ENABLE=False /workspace/xiaozhi-esp32-M5StackChan"...
+/workspace/idf-tools/python_env/idf6.1_py3.12_env/bin/python /workspace/esp-idf/tools/idf.py -DIDF_TARGET=esp32s3 -DSDKCONFIG_DEFAULTS=sdkconfig.defaults;build/xiaozhi-build.sdkconfig.defaults -DBOARD_NAME=m5stack-stackchan-k151 reconfigure failed
+Project Version: 2.5.2 (main/boards/m5stack/stackchan-k151/config.json)
+--------------------------------------------------------------------------------
+name: m5stack-stackchan-k151
+reported_type: m5stack-stackchan-k151
+target: esp32s3
+manufacturer: m5stack
+language: zh-CN
+build_options: {"camera_hmirror": false, "camera_vflip": false, "display_style": "default", "multiline_chat": false, "wifi_provisioning": "hotspot"}
+sdkconfig_append: CONFIG_BOARD_TYPE_M5STACK_STACKCHAN_K151=y
+sdkconfig_append: CONFIG_SPIRAM_MODE_QUAD=y
+sdkconfig_append: CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions/k151/16m.csv"
+sdkconfig_append: CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=y
+sdkconfig_append: CONFIG_K151_ALLOW_OTA=n
+sdkconfig_append: CONFIG_CAMERA_GC0308=y
+sdkconfig_append: CONFIG_CAMERA_GC0308_AUTO_DETECT_DVP_INTERFACE_SENSOR=y
+sdkconfig_append: CONFIG_CAMERA_GC0308_DVP_YUV422_320X240_20FPS=y
+sdkconfig_append: CONFIG_LV_FONT_MONTSERRAT_16=y
+sdkconfig_append: CONFIG_LV_FONT_MONTSERRAT_20=y
+sdkconfig_append: CONFIG_LV_FONT_MONTSERRAT_24=y
+sdkconfig_append: CONFIG_LANGUAGE_ZH_CN=y
+sdkconfig_append: CONFIG_USE_DEFAULT_MESSAGE_STYLE=y
+sdkconfig_append: CONFIG_USE_WECHAT_MESSAGE_STYLE=n
+sdkconfig_append: CONFIG_USE_MULTILINE_CHAT_MESSAGE=n
+sdkconfig_append: CONFIG_USE_HOTSPOT_WIFI_PROVISIONING=y
+sdkconfig_append: CONFIG_USE_ESP_BLUFI_WIFI_PROVISIONING=n
+sdkconfig_append: CONFIG_XIAOZHI_CAMERA_MIRROR_CONFIGURED=y
+sdkconfig_append: CONFIG_XIAOZHI_CAMERA_HMIRROR=n
+sdkconfig_append: CONFIG_XIAOZHI_CAMERA_VFLIP=n
+[INFO] Configuring target esp32s3.

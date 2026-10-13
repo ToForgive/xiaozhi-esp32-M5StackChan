@@ -239,6 +239,10 @@ elseif(CONFIG_BOARD_TYPE_M5STACK_CORE_P4)
     set(BUILTIN_TEXT_FONT font_noto_sans_basic_30_4)
     set(BUILTIN_ICON_FONT font_material_symbols_30_4)
     set(DEFAULT_EMOJI_COLLECTION noto-color-emoji_64)
+elseif(CONFIG_BOARD_TYPE_M5STACK_STACKCHAN_K151)
+    set(BOARD_DIR "m5stack/stackchan-k151")
+    set(BUILTIN_TEXT_FONT font_noto_sans_basic_20_4)
+    set(BUILTIN_ICON_FONT font_material_symbols_20_4)
 elseif(CONFIG_BOARD_TYPE_M5STACK_CORE_S3)
     set(BOARD_DIR "m5stack/core-s3")
     set(BUILTIN_TEXT_FONT font_noto_sans_basic_20_4)
@@ -934,6 +938,21 @@ file(GLOB BOARD_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/boards/${BOARD_DIR}/*.c
 )
 list(APPEND SOURCES ${BOARD_SOURCES})
+if(CONFIG_BOARD_TYPE_M5STACK_STACKCHAN_K151)
+    if(NOT CMAKE_BUILD_EARLY_EXPANSION AND NOT PROJECT_NAME STREQUAL "xiaozhi-k151")
+        message(FATAL_ERROR "K151 needs its own OTA identity; use scripts/build.py m5stack/stackchan-k151 --name m5stack-stackchan-k151")
+    endif()
+    file(GLOB_RECURSE K151_SOURCES CONFIGURE_DEPENDS
+        ${CMAKE_CURRENT_SOURCE_DIR}/boards/${BOARD_DIR}/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/boards/${BOARD_DIR}/hal/*.cc
+        ${CMAKE_CURRENT_SOURCE_DIR}/boards/${BOARD_DIR}/hal/*.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/boards/${BOARD_DIR}/stackchan/*.c)
+    list(APPEND SOURCES ${K151_SOURCES})
+    list(APPEND INCLUDE_DIRS
+        ${CMAKE_CURRENT_SOURCE_DIR}/boards/${BOARD_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/boards/${BOARD_DIR}/vendor/uitk
+        ${CMAKE_CURRENT_SOURCE_DIR}/boards/${BOARD_DIR}/vendor/uitk/lvgl)
+endif()
 
 # Select one audio engine for each chip family
 if(CONFIG_IDF_TARGET_ESP32S3 OR CONFIG_IDF_TARGET_ESP32P4 OR CONFIG_IDF_TARGET_ESP32S31)
@@ -1094,6 +1113,9 @@ if(CONFIG_IDF_TARGET_ESP32S3)
 endif()
 
 set(MAIN_PRIV_REQUIRES_EXTRA "")
+if(CONFIG_BOARD_TYPE_M5STACK_STACKCHAN_K151)
+    list(APPEND MAIN_PRIV_REQUIRES_EXTRA esp_driver_rmt)
+endif()
 if(CONFIG_XIAOZHI_NETWORK_ETHERNET AND CONFIG_XIAOZHI_ETH_PHY_IP101)
     list(APPEND MAIN_PRIV_REQUIRES_EXTRA espressif__ip101)
 endif()

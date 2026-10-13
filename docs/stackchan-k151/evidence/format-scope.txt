@@ -1,0 +1,23 @@
+main/boards/m5stack/stackchan-k151/stackchan_k151.cc
+main/boards/m5stack/stackchan-k151/k151_display.cc
+main/boards/m5stack/stackchan-k151/k151_ir.cc
+main/boards/m5stack/stackchan-k151/k151_application.cc
+main/boards/m5stack/stackchan-k151/cores3_audio_codec.cc
+main/boards/m5stack/stackchan-k151/k151_application.h
+main/boards/m5stack/stackchan-k151/config.h
+main/boards/m5stack/stackchan-k151/k151_ir.h
+main/boards/m5stack/stackchan-k151/k151_display.h
+main/boards/m5stack/stackchan-k151/k151_ir_codec.h
+main/boards/m5stack/stackchan-k151/k151_model.h
+main/boards/m5stack/stackchan-k151/cores3_audio_codec.h
+main/boards/m5stack/stackchan-k151/hal/hal.cc
+main/boards/m5stack/stackchan-k151/hal/hal.h
+main/boards/m5stack/stackchan-k151/hal/hal_servo.cpp
+main/boards/m5stack/stackchan-k151/hal/drivers/bmi270/bmi270.cpp
+main/boards/m5stack/stackchan-k151/stackchan/stackchan.h
+main/boards/m5stack/stackchan-k151/stackchan/modifiers/blink.h
+main/boards/m5stack/stackchan-k151/stackchan/motion/servo.h
+main/boards/m5stack/stackchan-k151/stackchan/motion/motion.cpp
+scripts/tests/k151/model_test.cc
+clang-format --dry-run -Werror: PASS
+Whitespace check: see whitespace-check.txt; unchanged FTServo warnings retained, all other changes PASS.

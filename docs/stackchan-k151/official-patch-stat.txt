@@ -1,0 +1,6 @@
+ main/application.cc              |  57 ++++++++--------
+ main/assets.cc                   | 136 +++++++++++++++++++--------------------
+ main/assets.h                    |  14 ++--
+ main/boards/common/i2c_device.cc |   4 ++
+ main/boards/common/i2c_device.h  |   1 +
+ 5 files changed, 110 insertions(+), 102 deletions(-)

@@ -135,7 +135,8 @@ def verify_assets(manifest, assets_dir):
                 raise ValueError(f"{name}: expected only merged-binary.bin")
             data = archive.read("merged-binary.bin")  # Also verifies ZIP CRC.
         meta = firmware_metadata(data)
-        if meta["version"] != manifest["version"] or meta["project"] != "xiaozhi":
+        expected_project = "xiaozhi-k151" if variant["full_name"] == "m5stack-stackchan-k151" else "xiaozhi"
+        if meta["version"] != manifest["version"] or meta["project"] != expected_project:
             raise ValueError(f"{name}: application version/project mismatch: {meta}")
         sdk_match = re.match(r"v?(\d+)\.(\d+)", meta["idf_version"])
         if not sdk_match or tuple(map(int, sdk_match.groups())) != sdk:

@@ -1,0 +1,13 @@
+Full staged whitespace check: 47 original FTServo trailing-space warnings; CRLF accepted.
+These six imported files are byte-for-byte identical to the recorded M5Stack source.
+No automatic reformatting was applied to original vendor files.
+path	warnings	sha256
+main/boards/m5stack/stackchan-k151/hal/drivers/FTServo_Arduino/src/HLSCL.cpp	14	3f15524ea2419d583db38e0e9d7b0a91e8b1652a9bcc6a49f88b44aac005c3eb
+main/boards/m5stack/stackchan-k151/hal/drivers/FTServo_Arduino/src/INST.h	3	a5718493f68dbd9cc8098ee9359a84049222e59ab4ca96c8bdfa056f96808cbc
+main/boards/m5stack/stackchan-k151/hal/drivers/FTServo_Arduino/src/SCS.cpp	4	fbfa586131a69f5236538517dab526151ff0a85e20181e5c57b1244a5c065449
+main/boards/m5stack/stackchan-k151/hal/drivers/FTServo_Arduino/src/SCSCL.cpp	12	75d30fabf087d84f54932fdaab2db33aecc4d8b4f49f3a9b2e4c84b1e7e53e60
+main/boards/m5stack/stackchan-k151/hal/drivers/FTServo_Arduino/src/SCSCL.h	1	bcaaadf54759da6e73c4adf4cdf2a3af1def2fc4f7b3d328d645d7fa3100e1a7
+main/boards/m5stack/stackchan-k151/hal/drivers/FTServo_Arduino/src/SMS_STS.cpp	13	7a4f35218ad38bdca89c5b8adfc844579764449401264b3cffeccf29a6524a48
+Other new/changed staged and working-tree files: PASS (git diff HEAD --check, six unchanged imports excluded).
+Avatar preservation: separate byte equality evidence; 25/25 matches.
+Touched C/C++ formatting: 21 paths, clang-format --dry-run -Werror PASS.

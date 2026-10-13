@@ -1,0 +1,41 @@
+{
+  "lvgl-reference": {
+    "url": "https://github.com/lvgl/lvgl.git",
+    "sha": "85aa60d18b3d5e5588d7b247abf90198f07c8a63"
+  },
+  "cjson-reference": {
+    "url": "https://github.com/DaveGamble/cJSON.git",
+    "sha": "c859b25da02955fef659d658b8f324b5cde87be3"
+  },
+  "ml307-reference": {
+    "url": "https://github.com/78/esp-ml307.git",
+    "sha": "75d6f81fddeb09f4b11bead18e29695b8c511ef9"
+  },
+  "esp-sr-reference": {
+    "url": "https://github.com/espressif/esp-sr.git",
+    "sha": "ae2b0bb5c0ded603e45ac17e902411c37cb32636"
+  },
+  "esp-bsp-reference": {
+    "url": "https://github.com/espressif/esp-bsp.git",
+    "sha": "f259a6abd5808019b1903a422092a4234ca95a51"
+  },
+  "esp-adf-reference": {
+    "url": "https://github.com/espressif/esp-adf.git",
+    "sha": "4cdbcd2a1bfd5823220de5b76921df26d95c8a7d",
+    "sparse": [
+      "components/esp_codec_dev"
+    ]
+  },
+  "esp-video-reference": {
+    "url": "https://github.com/espressif/esp-video-components.git",
+    "sha": "17aa7b26f63819aaa91e4409d5a2b7d1d04a0ab7"
+  },
+  "esp-adf-libs-reference": {
+    "url": "https://github.com/espressif/esp-adf-libs.git",
+    "sha": "029af747d7f8bddd4b774af58031f036d9bc2c3c",
+    "sparse": [
+      "esp_audio_codec",
+      "esp_audio_effects"
+    ]
+  }
+}

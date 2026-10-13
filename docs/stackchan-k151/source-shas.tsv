@@ -1,0 +1,23 @@
+name	sha	remote / purpose
+xiaozhi-esp32-M5StackChan	e076ac496e2d93dc3a2308a0491d745afe9489ab	https://github.com/ToForgive/xiaozhi-esp32-M5StackChan.git
+StackChan-reference	1b5765599fba8aaad1811d9a79358ccc7051f5f3	https://github.com/m5stack/StackChan.git
+StackChan-BSP-reference	8d4d6fc3b7a6be379c6317c45a02a30bff8c492e	https://github.com/m5stack/StackChan-BSP.git
+smooth-ui-reference	2a18ff5d3fd6b402339d0f4f3c2834f574e3cb05	https://github.com/Forairaaaaa/smooth_ui_toolkit.git
+mooncake-log-reference	554d55cd8c6e551b911b99cad274a46929f05bae	https://github.com/Forairaaaaa/mooncake_log.git
+xiaozhi-v224-reference	e77dedb1309153bb63fed285772962c920c97dd4	https://github.com/ToForgive/xiaozhi-esp32-M5StackChan.git
+esp-idf	fff9895c82d744c7237be8847347bdd1b07c6643	https://github.com/espressif/esp-idf.git
+m5-docs-reference	e5354c5dcc61d16fdc1dff9d92c2c760728d0b60	https://github.com/m5stack/m5-docs.git
+lvgl-reference	85aa60d18b3d5e5588d7b247abf90198f07c8a63	https://github.com/lvgl/lvgl.git
+cjson-reference	c859b25da02955fef659d658b8f324b5cde87be3	https://github.com/DaveGamble/cJSON.git
+ml307-reference	75d6f81fddeb09f4b11bead18e29695b8c511ef9	https://github.com/78/esp-ml307.git
+wifi-reference	cc103899ea8199b0fbf18c9b6e65152d9a92091e	https://github.com/78/esp-wifi-connect.git
+esp-adf-reference	4cdbcd2a1bfd5823220de5b76921df26d95c8a7d	https://github.com/espressif/esp-adf.git
+esp-adf-libs-reference	029af747d7f8bddd4b774af58031f036d9bc2c3c	https://github.com/espressif/esp-adf-libs.git
+esp-video-reference	17aa7b26f63819aaa91e4409d5a2b7d1d04a0ab7	https://github.com/espressif/esp-video-components.git
+esp-sr-reference	ae2b0bb5c0ded603e45ac17e902411c37cb32636	https://github.com/espressif/esp-sr.git
+xiaozhi-fonts-reference	d45dbc64052d57048f20ab1770074172ce9eb53b	https://github.com/78/xiaozhi-fonts.git
+mbedtls-host-reference	0bebf8b8c7f07abe3571ded48a11aa907a1ffb20	https://github.com/Mbed-TLS/mbedtls.git
+upstream-v2.5.2	49b4380b3faa0ceadd28a3e78aaf0f311c46c57e	78/xiaozhi-esp32 release base
+idf-v6.1-tag-object	4dc1c65503e98e9a6b4c3c5646237280ba79829b	annotated tag; commit listed above
+esp-sr-initial-checkout	78a923d29a45e4e1433b909d3da12ab5b0f994fc	initial 2.6.0 header check; final native verification pinned to 2.4.7
+esp-bsp-reference	f259a6abd5808019b1903a422092a4234ca95a51	https://github.com/espressif/esp-bsp.git

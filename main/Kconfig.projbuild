@@ -356,6 +356,9 @@ choice BOARD_TYPE
     config BOARD_TYPE_M5STACK_CORE_S3
         bool "M5Stack CoreS3"
         depends on IDF_TARGET_ESP32S3
+    config BOARD_TYPE_M5STACK_STACKCHAN_K151
+        bool "M5Stack StackChan K151 (factory avatar, no remote)"
+        depends on IDF_TARGET_ESP32S3
     config BOARD_TYPE_M5STACK_STICK_S3
         bool "M5Stack StickS3"
         depends on IDF_TARGET_ESP32S3
@@ -1173,3 +1176,11 @@ menu "TAIJIPAI_S3_CONFIG"
 endmenu
 
 endmenu
+
+config K151_ALLOW_OTA
+    bool "Allow K151 firmware OTA (requires compatible K151 image)"
+    depends on BOARD_TYPE_M5STACK_STACKCHAN_K151
+    default n
+    help
+        Keep official backend activation/configuration. Firmware updates are off by default.
+        When enabled, the app image must report project name xiaozhi-k151.
