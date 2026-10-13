@@ -1,5 +1,7 @@
 # M5Stack StackChan K151
 
+最新本机接续、已修复缺陷和未完成项见 [HANDOFF.md](../../../../docs/stackchan-k151/HANDOFF.md)。完整固件仍未链接；不把分离编译当成可刷写成品。
+
 这是原厂 K151 无遥控版的小智板型。开发基线为 fork `e076ac49`（v2.5.2 后6个提交），ESP-IDF 6.1。独立 board type/name 是 `m5stack-stackchan-k151`，镜像 project name 是 `xiaozhi-k151`。当前交付已实现代码与目标架构分离编译；完整固件构建被官方组件注册表连接阻断，未刷机、未实机验证。
 
 ## 实现

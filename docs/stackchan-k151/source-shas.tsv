@@ -21,3 +21,10 @@ upstream-v2.5.2	49b4380b3faa0ceadd28a3e78aaf0f311c46c57e	78/xiaozhi-esp32 releas
 idf-v6.1-tag-object	4dc1c65503e98e9a6b4c3c5646237280ba79829b	annotated tag; commit listed above
 esp-sr-initial-checkout	78a923d29a45e4e1433b909d3da12ab5b0f994fc	initial 2.6.0 header check; final native verification pinned to 2.4.7
 esp-bsp-reference	f259a6abd5808019b1903a422092a4234ca95a51	https://github.com/espressif/esp-bsp.git
+esp-iot-solution-reference	1d9a68a6989f85e278958b48fb6c50f350c72f65	https://github.com/espressif/esp-iot-solution.git (handoff research; not integrated)
+M5Unified-reference	e125e73f28b6b83e621e48df432af426bb2ff935	https://github.com/m5stack/M5Unified.git (handoff research; not integrated)
+M5Unit-NFC-reference	63c4caac1a07018ef73027e4b098d4fefe56c6f6	https://github.com/m5stack/M5Unit-NFC.git (handoff research; not integrated)
+BMM150-reference	0dce0617873cda1f6d51f6b7b961fdc2641e0c7c	https://github.com/boschsensortec/BMM150_SensorAPI.git (handoff research; not integrated)
+M5UnitUnified-reference	c6d337cf09a19f6762c52c2bd1c41fe5c0d7d285	https://github.com/m5stack/M5UnitUnified.git (handoff research; not integrated)
+M5Utility-reference	a8c562520bc1024d312a9746967e719f370a472d	https://github.com/m5stack/M5Utility.git (handoff research; not integrated)
+M5HAL-reference	c2bfcb2a7534b9af07e199f29d255ef38fb3885c	https://github.com/m5stack/M5HAL.git (handoff research; not integrated)

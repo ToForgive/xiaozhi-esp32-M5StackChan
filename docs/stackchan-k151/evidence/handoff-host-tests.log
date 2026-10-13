@@ -1,0 +1,169 @@
+test_board_menu_has_explicit_target_defaults (test_build.BoardMenuTests.test_board_menu_has_explicit_target_defaults) ... ok
+test_board_menu_is_sorted_and_matches_cmake (test_build.BoardMenuTests.test_board_menu_is_sorted_and_matches_cmake) ... ok
+test_alientek_directory_keeps_atk_board_types (test_build.BoardSelectionTests.test_alientek_directory_keeps_atk_board_types) ... ok
+test_board_display_name_comes_from_kconfig_prompt (test_build.BoardSelectionTests.test_board_display_name_comes_from_kconfig_prompt) ... ok
+test_board_target_matching_uses_complete_kconfig_symbols (test_build.BoardSelectionTests.test_board_target_matching_uses_complete_kconfig_symbols) ... ok
+test_common_and_core_changes_select_representatives (test_build.BoardSelectionTests.test_common_and_core_changes_select_representatives) ... ok
+test_docs_only_selects_none (test_build.BoardSelectionTests.test_docs_only_selects_none) ... ok
+test_explicit_board_config_rejects_different_board_directory (test_build.BoardSelectionTests.test_explicit_board_config_rejects_different_board_directory) ... ok
+test_explicit_board_config_rejects_incompatible_target (test_build.BoardSelectionTests.test_explicit_board_config_rejects_incompatible_target) ... ok
+test_inferred_board_config_rejects_incompatible_target (test_build.BoardSelectionTests.test_inferred_board_config_rejects_incompatible_target) ... ok
+test_m5stack_directory_can_omit_manufacturer_prefix (test_build.BoardSelectionTests.test_m5stack_directory_can_omit_manufacturer_prefix) ... ok
+test_nested_manufacturer_board_path (test_build.BoardSelectionTests.test_nested_manufacturer_board_path) ... ok
+test_new_manufacturer_directories_keep_existing_board_types (test_build.BoardSelectionTests.test_new_manufacturer_directories_keep_existing_board_types) ... ok
+test_official_directory_can_keep_legacy_board_type (test_build.BoardSelectionTests.test_official_directory_can_keep_legacy_board_type) ... ok
+test_rejected_board_selection_stops_before_build (test_build.BoardSelectionTests.test_rejected_board_selection_stops_before_build) ... ok
+test_same_leaf_names_are_scoped_by_manufacturer (test_build.BoardSelectionTests.test_same_leaf_names_are_scoped_by_manufacturer) ... ok
+test_variant_name_disambiguates_shared_board_directory (test_build.BoardSelectionTests.test_variant_name_disambiguates_shared_board_directory) ... ok
+test_m5stack_tab5_supports_st7121_and_st7123_panels (test_build.BoardSourceTests.test_m5stack_tab5_supports_st7121_and_st7123_panels) ... ok
+test_relative_board_includes_exist (test_build.BoardSourceTests.test_relative_board_includes_exist) ... ok
+test_blufi_expansion_disables_hotspot (test_build.BuildOptionTests.test_blufi_expansion_disables_hotspot) ... ok
+test_board_wake_word_support_obeys_psram_dependency (test_build.BuildOptionTests.test_board_wake_word_support_obeys_psram_dependency) ... ok
+test_bread_compact_esp32_config_supports_sh1106 (test_build.BuildOptionTests.test_bread_compact_esp32_config_supports_sh1106) ... ok
+test_bread_compact_nt26_supports_sh1106 (test_build.BuildOptionTests.test_bread_compact_nt26_supports_sh1106) ... ok
+test_camera_board_defaults_are_declared_by_board_config (test_build.BuildOptionTests.test_camera_board_defaults_are_declared_by_board_config) ... ok
+test_camera_mirror_guard_is_settable_by_build_defaults (test_build.BuildOptionTests.test_camera_mirror_guard_is_settable_by_build_defaults) ... ok
+test_configured_build_options_are_verified (test_build.BuildOptionTests.test_configured_build_options_are_verified) ... ok
+test_disabled_build_options_accept_symbols_hidden_by_kconfig (test_build.BuildOptionTests.test_disabled_build_options_accept_symbols_hidden_by_kconfig) ... ok
+test_display_style_only_writes_board_supported_choices (test_build.BuildOptionTests.test_display_style_only_writes_board_supported_choices) ... ok
+test_esp_vocat_default_style_overrides_emote_board_defaults (test_build.BuildOptionTests.test_esp_vocat_default_style_overrides_emote_board_defaults) ... ok
+test_incompatible_wake_word_model_is_rejected (test_build.BuildOptionTests.test_incompatible_wake_word_model_is_rejected) ... ok
+test_language_normalization_and_option (test_build.BuildOptionTests.test_language_normalization_and_option) ... ok
+test_languages_are_discovered_from_build_configuration (test_build.BuildOptionTests.test_languages_are_discovered_from_build_configuration) ... ok
+test_lcd_board_exposes_curated_display_options (test_build.BuildOptionTests.test_lcd_board_exposes_curated_display_options) ... ok
+test_missing_esp_sr_kconfig_has_actionable_error (test_build.BuildOptionTests.test_missing_esp_sr_kconfig_has_actionable_error) ... ok
+test_no_spiram_drops_s3_lvgl_psram_pool (test_build.BuildOptionTests.test_no_spiram_drops_s3_lvgl_psram_pool) ... ok
+test_non_default_style_disables_multiline_chat (test_build.BuildOptionTests.test_non_default_style_disables_multiline_chat) ... ok
+test_nothrow_camera_constructor_exposes_mirror_options (test_build.BuildOptionTests.test_nothrow_camera_constructor_exposes_mirror_options) ... ok
+test_optional_usb_camera_options_require_camera_to_be_enabled (test_build.BuildOptionTests.test_optional_usb_camera_options_require_camera_to_be_enabled) ... ok
+test_supported_languages_match_kconfig_and_cmake (test_build.BuildOptionTests.test_supported_languages_match_kconfig_and_cmake) ... ok
+test_unknown_semantic_build_option_is_rejected (test_build.BuildOptionTests.test_unknown_semantic_build_option_is_rejected) ... ok
+test_user_options_override_board_options (test_build.BuildOptionTests.test_user_options_override_board_options) ... ok
+test_wake_word_alias_selects_target_engine (test_build.BuildOptionTests.test_wake_word_alias_selects_target_engine) ... ok
+test_wake_word_disabled_removes_target_default_model (test_build.BuildOptionTests.test_wake_word_disabled_removes_target_default_model) ... ok
+test_wake_words_are_read_from_esp_sr_kconfig (test_build.BuildOptionTests.test_wake_words_are_read_from_esp_sr_kconfig) ... ok
+test_build_does_not_create_zip_by_default (test_build.CliTests.test_build_does_not_create_zip_by_default) ... ok
+test_build_options_json_is_forwarded (test_build.CliTests.test_build_options_json_is_forwarded) ... ok
+test_language_and_wake_word_are_forwarded (test_build.CliTests.test_language_and_wake_word_are_forwarded) ... ok
+test_list_boards_prints_boards_and_multi_variants (test_build.CliTests.test_list_boards_prints_boards_and_multi_variants) ... ok
+test_list_languages_supports_json (test_build.CliTests.test_list_languages_supports_json) ... ok
+test_list_wake_words_supports_json (test_build.CliTests.test_list_wake_words_supports_json) ... ok
+test_no_arguments_prints_help_without_building (test_build.CliTests.test_no_arguments_prints_help_without_building) ... ok
+test_zip_flag_is_forwarded (test_build.CliTests.test_zip_flag_is_forwarded) ... ok
+test_duplicate_reported_identifiers_fail_collection (test_build.InvalidConfigTests.test_duplicate_reported_identifiers_fail_collection) ... ok
+test_invalid_reported_identifiers_are_rejected (test_build.InvalidConfigTests.test_invalid_reported_identifiers_are_rejected) ... ok
+test_invalid_version_rule_fails_collection (test_build.InvalidConfigTests.test_invalid_version_rule_fails_collection) ... ok
+test_missing_reported_type_fails_collection (test_build.InvalidConfigTests.test_missing_reported_type_fails_collection) ... ok
+test_merge_bin_enables_preview_mode (test_build.PreviewTargetTests.test_merge_bin_enables_preview_mode) ... ok
+test_stage_marker_is_only_emitted_when_enabled (test_build.PreviewTargetTests.test_stage_marker_is_only_emitted_when_enabled) ... ok
+test_changed_cmake_target_runs_fullclean_only (test_build.TargetConfigurationTests.test_changed_cmake_target_runs_fullclean_only) ... ok
+test_configure_build_replaces_stale_sdkconfig_backup (test_build.TargetConfigurationTests.test_configure_build_replaces_stale_sdkconfig_backup) ... ok
+test_configure_build_uses_all_cmake_values_in_one_run (test_build.TargetConfigurationTests.test_configure_build_uses_all_cmake_values_in_one_run) ... ok
+test_same_target_does_not_clean_build_directory (test_build.TargetConfigurationTests.test_same_target_does_not_clean_build_directory) ... ok
+test_sync_vscode_target_preserves_other_settings (test_build.TargetConfigurationTests.test_sync_vscode_target_preserves_other_settings) ... ok
+test_sync_vscode_target_skips_missing_settings (test_build.TargetConfigurationTests.test_sync_vscode_target_skips_missing_settings) ... ok
+test_interactive_selection_accepts_number (test_build.VariantSelectionTests.test_interactive_selection_accepts_number) ... ok
+test_non_interactive_selection_requires_name (test_build.VariantSelectionTests.test_non_interactive_selection_requires_name) ... [ERROR] Multiple variants found in non-interactive mode; select one with --name.
+ok
+test_chip_defaults_only_contain_target_overrides (test_build.VersionTests.test_chip_defaults_only_contain_target_overrides) ... ok
+test_current_matrix_uniqueness_and_p4_variants (test_build.VersionTests.test_current_matrix_uniqueness_and_p4_variants) ... [WARN] Ambiguous board config for lilygo/t-cameraplus-s3 (target=esp32s3), target-matched candidates=['CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_0_V1_1', 'CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_2'], selecting first: CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_0_V1_1
+[WARN] Ambiguous board config for lilygo/t-cameraplus-s3 (target=esp32s3), target-matched candidates=['CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_0_V1_1', 'CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_2'], selecting first: CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_0_V1_1
+[WARN] Ambiguous board config for lilygo/t-cameraplus-s3 (target=esp32s3), target-matched candidates=['CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_0_V1_1', 'CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_2'], selecting first: CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_0_V1_1
+ok
+test_default_flash_options_are_not_repeated (test_build.VersionTests.test_default_flash_options_are_not_repeated) ... ok
+test_gc0308_camera_sdkconfig_keys_use_digit_zero (test_build.VersionTests.test_gc0308_camera_sdkconfig_keys_use_digit_zero) ... ok
+test_language_and_wake_word_are_not_board_config_options (test_build.VersionTests.test_language_and_wake_word_are_not_board_config_options) ... ok
+test_parse_and_match (test_build.VersionTests.test_parse_and_match) ... ok
+test_reported_types_and_names_are_valid_and_unique (test_build.VersionTests.test_reported_types_and_names_are_valid_and_unique) ... ok
+test_zip_is_always_recreated (test_build.ZipTests.test_zip_is_always_recreated) ... ok
+test_esp_hi_emoji_pack_matches_runtime_assets (test_build_default_assets.BuildDefaultAssetsTest.test_esp_hi_emoji_pack_matches_runtime_assets)
+ESP-HI must only pack AAF files that emoji_display actually loads. ... ok
+test_max_size_allows_fitting_assets (test_build_default_assets.BuildDefaultAssetsTest.test_max_size_allows_fitting_assets) ... ok
+test_max_size_rejects_oversized_assets (test_build_default_assets.BuildDefaultAssetsTest.test_max_size_rejects_oversized_assets) ... ok
+test_text_font_metadata_uses_bundle_charset_size_and_bpp (test_build_default_assets.BuildDefaultAssetsTest.test_text_font_metadata_uses_bundle_charset_size_and_bpp) ... ok
+test_text_font_requires_bundle (test_build_default_assets.BuildDefaultAssetsTest.test_text_font_requires_bundle) ... ok
+test_wakenet10_copy_keeps_p4_p2_slice (test_build_default_assets.BuildDefaultAssetsTest.test_wakenet10_copy_keeps_p4_p2_slice) ... ok
+test_wakenet10_copy_keeps_s3_p1_slice (test_build_default_assets.BuildDefaultAssetsTest.test_wakenet10_copy_keeps_s3_p1_slice) ... ok
+test_wakenet10_copy_rejects_unknown_target (test_build_default_assets.BuildDefaultAssetsTest.test_wakenet10_copy_rejects_unknown_target) ... ok
+[WARN] Ambiguous board config for lilygo/t-cameraplus-s3 (target=esp32s3), target-matched candidates=['CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_0_V1_1', 'CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_2'], selecting first: CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_0_V1_1
+test_board_only_includes_all_its_variants (test_ci_selection.CiSelectionTests.test_board_only_includes_all_its_variants) ... ok
+test_common_paths_select_only_the_reviewed_list (test_ci_selection.CiSelectionTests.test_common_paths_select_only_the_reviewed_list) ... ok
+test_docs_only_and_empty_changes_skip_firmware (test_ci_selection.CiSelectionTests.test_docs_only_and_empty_changes_skip_firmware) ... ok
+test_ethernet_does_not_replace_changed_boards_wifi_variants (test_ci_selection.CiSelectionTests.test_ethernet_does_not_replace_changed_boards_wifi_variants) ... ok
+test_ethernet_option_is_scoped_and_emits_mutually_exclusive_config (test_ci_selection.CiSelectionTests.test_ethernet_option_is_scoped_and_emits_mutually_exclusive_config) ... ok
+test_full_selection_includes_every_default_and_ethernet (test_ci_selection.CiSelectionTests.test_full_selection_includes_every_default_and_ethernet) ... ok
+test_missing_duplicate_and_invalid_option_entries_fail (test_ci_selection.CiSelectionTests.test_missing_duplicate_and_invalid_option_entries_fail) ... ok
+test_mixed_changes_preserve_nonrepresentative_boards_in_either_order (test_ci_selection.CiSelectionTests.test_mixed_changes_preserve_nonrepresentative_boards_in_either_order) ... ok
+test_representative_board_changes_do_not_duplicate_default_build (test_ci_selection.CiSelectionTests.test_representative_board_changes_do_not_duplicate_default_build) ... ok
+test_reviewed_list_has_18_builds_and_all_chip_targets (test_ci_selection.CiSelectionTests.test_reviewed_list_has_18_builds_and_all_chip_targets) ... ok
+test_first_ci_branch_push_uses_main_merge_base (test_ci_selection.WorkflowDiffTests.test_first_ci_branch_push_uses_main_merge_base) ... ok
+test_missing_push_baseline_and_manual_run_include_all_files (test_ci_selection.WorkflowDiffTests.test_missing_push_baseline_and_manual_run_include_all_files) ... ok
+test_normal_push_includes_only_changed_paths (test_ci_selection.WorkflowDiffTests.test_normal_push_includes_only_changed_paths) ... ok
+test_pr_excludes_main_changes_since_branching (test_ci_selection.WorkflowDiffTests.test_pr_excludes_main_changes_since_branching) ... ok
+test_rename_reports_both_board_paths (test_ci_selection.WorkflowDiffTests.test_rename_reports_both_board_paths) ... ok
+test_actual_reader_cache_and_touch_with_failed_transfers (test_esp_vocat_i2c.EspVocatI2cTests.test_actual_reader_cache_and_touch_with_failed_transfers) ... ok
+test_failed_samples_do_not_dispatch_touch_or_battery_alerts (test_esp_vocat_i2c.EspVocatI2cTests.test_failed_samples_do_not_dispatch_touch_or_battery_alerts) ... ok
+test_canonical_variant_identity (test_k151.K151Tests.test_canonical_variant_identity) ... [WARN] Ambiguous board config for lilygo/t-cameraplus-s3 (target=esp32s3), target-matched candidates=['CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_0_V1_1', 'CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_2'], selecting first: CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_0_V1_1
+ok
+test_disabled_ota_returns_before_touching_display_or_audio (test_k151.K151Tests.test_disabled_ota_returns_before_touching_display_or_audio) ... ok
+test_ota_header_preserves_fragmented_http_reads (test_k151.K151Tests.test_ota_header_preserves_fragmented_http_reads) ... ok
+test_partition_preserves_calibration_address_and_fits_flash (test_k151.K151Tests.test_partition_preserves_calibration_address_and_fits_flash) ... ok
+test_state_recovery_and_ir (test_k151.K151Tests.test_state_recovery_and_ir) ... K151 state/recovery and 65536 NEC pairs passed
+ok
+test_actual_preview_and_theme_do_not_call_default_ui_or_wait_for_lvgl (test_k151_runtime.K151RuntimeTests.test_actual_preview_and_theme_do_not_call_default_ui_or_wait_for_lvgl) ... ok
+test_actual_telemetry_accessors_are_cached_and_expire (test_k151_runtime.K151RuntimeTests.test_actual_telemetry_accessors_are_cached_and_expire) ... ok
+test_sleep_owner_handles_concurrent_atomic_requests_and_deadlines (test_k151_runtime.K151RuntimeTests.test_sleep_owner_handles_concurrent_atomic_requests_and_deadlines) ... ok
+test_missing_argument_keeps_error_code (test_mcp_server.McpServerTest.test_missing_argument_keeps_error_code) ... ok
+test_real_press_to_talk_error_and_subsequent_success (test_mcp_server.McpServerTest.test_real_press_to_talk_error_and_subsequent_success) ... ok
+test_tool_error_message_round_trips (test_mcp_server.McpServerTest.test_tool_error_message_round_trips) ... ok
+test_unknown_method_and_tool_errors (test_mcp_server.McpServerTest.test_unknown_method_and_tool_errors) ... ok
+test_zero_length_lace_is_processed_without_more_input (test_ogg_demuxer.OggDemuxerTest.test_zero_length_lace_is_processed_without_more_input) ... ok
+test_annotated_tag_and_existing_draft_must_target_the_same_source (test_release.ReleaseTests.test_annotated_tag_and_existing_draft_must_target_the_same_source) ... ok
+test_draft_lookup_uses_the_list_endpoint_and_handles_pagination (test_release.ReleaseTests.test_draft_lookup_uses_the_list_endpoint_and_handles_pagination) ... ok
+test_full_matrix_keeps_sdk_gated_variants_and_excludes_ci_options (test_release.ReleaseTests.test_full_matrix_keeps_sdk_gated_variants_and_excludes_ci_options) ... [WARN] Ambiguous board config for lilygo/t-cameraplus-s3 (target=esp32s3), target-matched candidates=['CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_0_V1_1', 'CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_2'], selecting first: CONFIG_BOARD_TYPE_LILYGO_T_CAMERAPLUS_S3_V1_0_V1_1
+ok
+test_k151_package_requires_its_isolated_project_identity (test_release.ReleaseTests.test_k151_package_requires_its_isolated_project_identity) ... ok
+test_missing_and_truncated_app_partitions_fail (test_release.ReleaseTests.test_missing_and_truncated_app_partitions_fail) ... ok
+test_missing_extra_and_duplicate_variants_cannot_pass (test_release.ReleaseTests.test_missing_extra_and_duplicate_variants_cannot_pass) ... ok
+test_publication_waits_for_complete_remote_assets_and_matching_digests (test_release.ReleaseTests.test_publication_waits_for_complete_remote_assets_and_matching_digests) ... ok
+test_published_release_and_moved_tag_are_never_overwritten (test_release.ReleaseTests.test_published_release_and_moved_tag_are_never_overwritten) ... ok
+test_rejects_invalid_version_sha_and_sdk (test_release.ReleaseTests.test_rejects_invalid_version_sha_and_sdk) ... ok
+test_upload_failure_leaves_the_release_unpublished (test_release.ReleaseTests.test_upload_failure_leaves_the_release_unpublished) ... ok
+test_verified_package_has_a_reproducible_checksum (test_release.ReleaseTests.test_verified_package_has_a_reproducible_checksum) ... ok
+test_wrong_version_chip_sdk_project_and_zip_layout_fail (test_release.ReleaseTests.test_wrong_version_chip_sdk_project_and_zip_layout_fail) ... ok
+
+----------------------------------------------------------------------
+Ran 124 tests in 16.918s
+
+OK
+[INFO] Switching target from esp32c3 to esp32s3.
+[INFO] Reusing target esp32s3.
+[INFO] Updated /tmp/tmpcl2d53kq/settings.json IDF_TARGET to esp32s3.
+Available variants for test-board:
+  1. variant-a
+  2. variant-b
+Available variants for test-board:
+  1. variant-a
+  2. variant-b
+zip bin to releases/v1.2.3_test-board.zip done
+Starting to build assets...
+Copied: /tmp/tmpc0_f9lp_/extra/small.bin -> /tmp/tmpc0_f9lp_/temp_build/assets/small.bin
+Processed 1 extra files from: /tmp/tmpc0_f9lp_/extra
+Generated: /tmp/tmpc0_f9lp_/temp_build/assets/index.json
+Generated: /tmp/tmpc0_f9lp_/temp_build/config.json
+All files have been merged into assets.bin
+Successfully generated assets.bin: /tmp/tmpc0_f9lp_/assets.bin
+Assets file size: 0.17K (177 bytes)
+Starting to build assets...
+Copied: /tmp/tmp5yye1pl5/extra/big.bin -> /tmp/tmp5yye1pl5/temp_build/assets/big.bin
+Processed 1 extra files from: /tmp/tmp5yye1pl5/extra
+Generated: /tmp/tmp5yye1pl5/temp_build/assets/index.json
+Generated: /tmp/tmp5yye1pl5/temp_build/config.json
+All files have been merged into assets.bin
+Successfully generated assets.bin: /tmp/tmp5yye1pl5/assets.bin
+Assets file size: 4.17K (4266 bytes)
+Error: assets.bin size 4266 bytes exceeds partition limit 100 bytes (0.10K)
+Generated: /tmp/tmpk4k0xdbm/index.json
+Copied WakeNet10 wn10_nihaoxiaozhi (p2) -> /tmp/tmpy8x2e8of/out
+Copied WakeNet10 wn10_nihaoxiaozhi (p1) -> /tmp/tmpjnigmjqi/out
+Published v2.5.2: https://example.com/release

@@ -5,8 +5,9 @@
 #include "cores3_audio_codec.h"
 #include "display/lcd_display.h"
 #include "i2c_device.h"
+#include "k151_application.h"
 #include "k151_display.h"
-#include "power_save_timer.h"
+#include "k151_power_save_timer.h"
 #include "settings.h"
 #include "wifi_board.h"
 
@@ -172,6 +173,25 @@ public:
         // still counts even after the battery is full.
         return current_direction != 2 || is_charging_done;
     }
+
+    bool ReadPowerSnapshot(uint32_t& packed) {
+        uint8_t status_reg = 0x01, level_reg = 0xA4, status, level;
+        if (i2c_master_transmit_receive(i2c_device_, &status_reg, 1, &status, 1, 40) != ESP_OK ||
+            i2c_master_transmit_receive(i2c_device_, &level_reg, 1, &level, 1, 40) != ESP_OK ||
+            level > 100)
+            return false;
+        const uint8_t direction = (status & 0x60) >> 5;
+        packed = level | (uint32_t(direction == 1) << 8) | (uint32_t(direction == 2) << 9) |
+                 (uint32_t(direction != 2 || (status & 7) == 4) << 10);
+        return true;
+    }
+    bool RequestPowerOff() {
+        uint8_t reg = 0x10, value;
+        if (i2c_master_transmit_receive(i2c_device_, &reg, 1, &value, 1, 40) != ESP_OK)
+            return false;
+        uint8_t command[] = {reg, uint8_t(value | 1)};
+        return i2c_master_transmit(i2c_device_, command, sizeof(command), 40) == ESP_OK;
+    }
 };
 
 class CustomBacklight : public Backlight {
@@ -313,10 +333,11 @@ private:
     K151Display* display_;
     EspVideo* camera_;
 
-    PowerSaveTimer* power_save_timer_;
+    K151PowerSaveTimer* power_save_timer_;
     K151Config xiaozhi_config_;
     bool last_power_save_enabled_ = false;
     int64_t last_power_state_check_ms_ = 0;
+    k151::SensorCache<uint32_t> battery_cache_;
 
     bool ShouldEnablePowerSave(bool has_external_power, bool is_discharging) const {
         return is_discharging || (has_external_power && xiaozhi_config_.allowShutdownWhenCharging);
@@ -346,7 +367,14 @@ private:
         }
         last_power_state_check_ms_ = now_ms;
 
-        UpdatePowerSaveEnabled(pmic_->IsExternalPowerConnected(), pmic_->IsDischarging());
+        uint32_t packed;
+        if (pmic_->ReadPowerSnapshot(packed)) {
+            battery_cache_.Update(packed, now_ms);
+            UpdatePowerSaveEnabled(packed & (1 << 10), packed & (1 << 9));
+        } else {
+            battery_cache_.Invalidate();
+            UpdatePowerSaveEnabled(false, false);
+        }
     }
 
     void InitializePowerSaveTimer() {
@@ -365,7 +393,7 @@ private:
             "Init power save timer: sleep=%d s, shutdown=%d s, allow_shutdown_when_charging=%d",
             seconds_to_sleep, seconds_to_shutdown, xiaozhi_config_.allowShutdownWhenCharging);
 
-        power_save_timer_ = new PowerSaveTimer(-1, seconds_to_sleep, seconds_to_shutdown);
+        power_save_timer_ = new K151PowerSaveTimer(seconds_to_sleep, seconds_to_shutdown);
         power_save_timer_->OnEnterSleepMode([this]() {
             GetDisplay()->SetPowerSaveMode(true);
             // GetBacklight()->SetBrightness(10);
@@ -375,10 +403,14 @@ private:
             GetBacklight()->RestoreBrightness();
         });
         power_save_timer_->OnShutdownRequest([this]() {
-            GetHAL().DisableServoSupplyForShutdown();
-            pmic_->PowerOff();
+            if (!GetHAL().DisableServoSupplyForShutdown())
+                ESP_LOGE(TAG, "VM off command failed; physical supply unknown");
+            if (!pmic_->RequestPowerOff()) {
+                ESP_LOGE(TAG, "PMIC power off failed; robot motion remains locked");
+                GetDisplay()->ShowNotification("Power off failed; motion locked", 10000);
+            }
         });
-        UpdatePowerSaveEnabled(pmic_->IsExternalPowerConnected(), pmic_->IsDischarging());
+        PollPowerSaveState();
     }
 
     void InitializeI2c() {
@@ -455,6 +487,7 @@ private:
                                 while (true) {
                                     self->PollTouchpad();
                                     self->PollPowerSaveState();
+                                    self->power_save_timer_->Poll(K151CanEnterSleepMode());
                                     GetHAL().pollSensors();
                                     vTaskDelay(pdMS_TO_TICKS(50));
                                 }
@@ -628,10 +661,12 @@ public:
     virtual Camera* GetCamera() override { return camera_; }
 
     virtual bool GetBatteryLevel(int& level, bool& charging, bool& discharging) override {
-        charging = pmic_->IsCharging();
-        discharging = pmic_->IsDischarging();
-        // Sensor polling owns the timer policy, including the persisted ext_pwr setting.
-        level = pmic_->GetBatteryLevel();
+        auto snapshot = battery_cache_.Read(esp_timer_get_time() / 1000, 5000);
+        if (!snapshot)
+            return false;
+        level = *snapshot & 255;
+        charging = *snapshot & (1 << 8);
+        discharging = *snapshot & (1 << 9);
         return true;
     }
 

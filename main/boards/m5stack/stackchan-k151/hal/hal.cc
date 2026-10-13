@@ -38,8 +38,8 @@ void Hal::init(i2c_master_bus_handle_t bus) {
     if (ready) {
         ioe_->setDirection(0, true);
         ioe_->setPullMode(0, true);
-        ioe_->digitalWrite(0, true);
-        servo_power_ = servo_available_ = true;
+        servo_power_ = servo_available_ = ioe_->tryDigitalWrite(0, true) == ESP_OK;
+        supply_status_.store(servo_power_ ? 2 : 0);
         ioe_->setDirection(13, true);
         ioe_->setPullMode(13, true);
         ioe_->setDriveMode(13, false);
@@ -119,6 +119,28 @@ void Hal::pollSensors() {
                 postEvent(Shake);
         }
     }
+    const uint64_t now64 = esp_timer_get_time() / 1000;
+    if (now64 - telemetry_tick_ >= 1000) {
+        telemetry_tick_ = now64;
+        float volts, amps;
+        if (ReadPowerDevice(volts, amps))
+            power_cache_.Update({volts, amps}, now64);
+        if (rtc_) {
+            m5::rtc_date_t date;
+            m5::rtc_time_t time;
+            if (rtc_->getDateTime(&date, &time) && date.year >= 2000 && date.month >= 1 &&
+                date.month <= 12 && date.date >= 1 && date.date <= 31 && time.hours >= 0 &&
+                time.hours < 24 && time.minutes >= 0 && time.minutes < 60 && time.seconds >= 0 &&
+                time.seconds < 60) {
+                char buffer[32];
+                snprintf(buffer, sizeof(buffer), "%04d-%02d-%02dT%02d:%02d:%02d", date.year,
+                         date.month, date.date, time.hours, time.minutes, time.seconds);
+                rtc_cache_.Update(std::string(buffer), now64);
+            } else {
+                rtc_cache_.Invalidate();
+            }
+        }
+    }
 }
 bool Hal::queueCommand(const K151Command& command) {
     return commands_ && xQueueSend(commands_, &command, 0) == pdTRUE;
@@ -126,6 +148,13 @@ bool Hal::queueCommand(const K151Command& command) {
 void Hal::updateMotion() {
     K151Command command;
     auto& motion = GetStackChan().motion();
+    if (shutting_down_.load()) {
+        motion.stop();
+        if (servo_power_)
+            motion.setTorqueEnabled(false);
+        servo_power_ = false;
+        return;
+    }
     int sleep = sleep_requested_.exchange(-1);
     if (sleep >= 0) {
         sleep_pending_ = sleep;
@@ -170,13 +199,15 @@ void Hal::updateMotion() {
         motion.setModifyLock(true);
     }
 }
-void Hal::DisableServoSupplyForShutdown() {
+bool Hal::DisableServoSupplyForShutdown() {
     // A shutdown request must not be lost behind a full control queue.
     shutting_down_.store(true);
     if (!ioe_)
-        return;
+        return false;
     std::lock_guard lock(ioe_mutex_);
-    ioe_->digitalWrite(0, false);
+    const bool ack = ioe_->tryDigitalWrite(0, false) == ESP_OK;
+    supply_status_.store(ack ? 1 : 0);
+    return ack;
 }
 void Hal::setServoPowerEnabled(bool enabled) {
     if (!ioe_ || (enabled && !servo_available_))
@@ -189,8 +220,15 @@ void Hal::setServoPowerEnabled(bool enabled) {
     std::lock_guard lock(ioe_mutex_);
     if (enabled && shutting_down_.load())
         return;
-    ioe_->digitalWrite(0, enabled);
-    servo_power_ = enabled;
+    const bool ack = ioe_->tryDigitalWrite(0, enabled) == ESP_OK;
+    supply_status_.store(ack ? (enabled ? 2 : 1) : 0);
+    // An I/O failure never permits motion or claims that the physical supply is off.
+    servo_power_ = enabled && ack;
+    if (!ack) {
+        GetStackChan().motion().stop();
+        GetStackChan().motion().setTorqueEnabled(false);
+        ESP_LOGE("K151", "VM write failed; physical supply unknown, motion inhibited");
+    }
     if (enabled)
         servo_ready_at_ = millis() + 200;
 }
@@ -215,6 +253,21 @@ void Hal::showRgbColor(uint8_t r, uint8_t g, uint8_t b) {
     ioe_->refreshLeds();
 }
 bool Hal::ReadPower(float& volts, float& amps) {
+    auto sample = power_cache_.Read(esp_timer_get_time() / 1000, 5000);
+    if (!sample)
+        return false;
+    volts = sample->volts;
+    amps = sample->amps;
+    return true;
+}
+bool Hal::ReadRtc(std::string& calendar) {
+    auto sample = rtc_cache_.Read(esp_timer_get_time() / 1000, 5000);
+    if (!sample)
+        return false;
+    calendar = *sample;
+    return true;
+}
+bool Hal::ReadPowerDevice(float& volts, float& amps) {
     if (!ina_)
         return false;
     uint8_t bus_reg = 0x02, current_reg = 0x04, raw_bus[2], raw_current[2];
@@ -232,6 +285,11 @@ void Hal::registerTools() {
                    [this](const PropertyList&) -> ReturnValue {
                        auto json = cJSON_CreateObject();
                        cJSON_AddBoolToObject(json, "servo", servo_available_);
+                       cJSON_AddStringToObject(json, "servo_supply_command",
+                                               supply_status_.load() == 2   ? "on_write_acked"
+                                               : supply_status_.load() == 1 ? "off_write_acked"
+                                                                            : "unknown_io_error");
+                       cJSON_AddBoolToObject(json, "shutdown_latched", shutting_down_.load());
                        cJSON_AddBoolToObject(json, "rgb", bool(ioe_));
                        cJSON_AddBoolToObject(json, "head_touch", headTouchAvailable());
                        cJSON_AddBoolToObject(json, "imu", imuAvailable());
@@ -285,7 +343,7 @@ void Hal::registerTools() {
                        {}, [this](const PropertyList&) -> ReturnValue {
                            float volts, amps;
                            if (!ReadPower(volts, amps))
-                               return std::string("INA226 read failed");
+                               return std::string("INA226 snapshot unavailable or stale");
                            auto json = cJSON_CreateObject();
                            cJSON_AddNumberToObject(json, "volts", volts);
                            cJSON_AddNumberToObject(json, "amps", amps);
@@ -296,15 +354,10 @@ void Hal::registerTools() {
                        "Read the hardware RTC calendar without changing system/server time. Clock "
                        "validity must be checked on hardware.",
                        {}, [this](const PropertyList&) -> ReturnValue {
-                           m5::rtc_date_t date;
-                           m5::rtc_time_t time;
-                           if (!rtc_->getDateTime(&date, &time))
-                               return std::string("RTC read failed");
-                           char buffer[40];
-                           snprintf(buffer, sizeof(buffer), "%04d-%02d-%02dT%02d:%02d:%02d",
-                                    date.year, date.month, date.date, time.hours, time.minutes,
-                                    time.seconds);
-                           return std::string(buffer);
+                           std::string calendar;
+                           if (!ReadRtc(calendar))
+                               return std::string("RTC snapshot unavailable, invalid or stale");
+                           return calendar;
                        });
     GetK151Ir().RegisterTools();
 }

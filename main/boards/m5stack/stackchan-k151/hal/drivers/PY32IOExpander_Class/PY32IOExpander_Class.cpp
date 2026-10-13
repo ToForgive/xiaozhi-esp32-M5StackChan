@@ -77,13 +77,13 @@ PY32IOExpander_Class::~PY32IOExpander_Class()
 esp_err_t PY32IOExpander_Class::writeRegister8(uint8_t reg, uint8_t value)
 {
     uint8_t buf[2] = {reg, value};
-    return i2c_master_transmit(_i2c_dev, buf, sizeof(buf), 1000);
+    return i2c_master_transmit(_i2c_dev, buf, sizeof(buf), 40);
 }
 
 uint8_t PY32IOExpander_Class::readRegister8(uint8_t reg)
 {
     uint8_t val   = 0;
-    esp_err_t err = i2c_master_transmit_receive(_i2c_dev, &reg, 1, &val, 1, 1000);
+    esp_err_t err = i2c_master_transmit_receive(_i2c_dev, &reg, 1, &val, 1, 40);
     if (err != ESP_OK) {
         ESP_LOGE(TAG, "readRegister8 failed: %s", esp_err_to_name(err));
         return 0;
@@ -102,14 +102,14 @@ esp_err_t PY32IOExpander_Class::writeRegister(uint8_t reg, const uint8_t* data, 
     buf[0] = reg;
     memcpy(buf + 1, data, len);
 
-    esp_err_t err = i2c_master_transmit(_i2c_dev, buf, len + 1, 1000);
+    esp_err_t err = i2c_master_transmit(_i2c_dev, buf, len + 1, 40);
     free(buf);
     return err;
 }
 
 esp_err_t PY32IOExpander_Class::readRegister(uint8_t reg, uint8_t* data, size_t len)
 {
-    return i2c_master_transmit_receive(_i2c_dev, &reg, 1, data, len, 1000);
+    return i2c_master_transmit_receive(_i2c_dev, &reg, 1, data, len, 40);
 }
 
 esp_err_t PY32IOExpander_Class::bitOn(uint8_t reg, uint8_t mask)
@@ -223,6 +223,18 @@ bool PY32IOExpander_Class::getWriteValue(uint8_t pin)
 void PY32IOExpander_Class::digitalWrite(uint8_t pin, bool level)
 {
     _writeBit(REG_GPIO_O_L, REG_GPIO_O_H, pin, level);
+}
+
+esp_err_t PY32IOExpander_Class::tryDigitalWrite(uint8_t pin, bool level)
+{
+    if (pin >= 14) return ESP_ERR_INVALID_ARG;
+    const uint8_t reg = pin < 8 ? REG_GPIO_O_L : REG_GPIO_O_H;
+    const uint8_t mask = 1 << (pin % 8);
+    uint8_t value;
+    const auto read = i2c_master_transmit_receive(_i2c_dev, &reg, 1, &value, 1, 40);
+    if (read != ESP_OK) return read;
+    value = level ? value | mask : value & ~mask;
+    return writeRegister8(reg, value);
 }
 
 bool PY32IOExpander_Class::digitalRead(uint8_t pin)

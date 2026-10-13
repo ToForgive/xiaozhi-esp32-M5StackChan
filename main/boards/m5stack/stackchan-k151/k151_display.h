@@ -23,6 +23,7 @@ public:
     void SetPowerSaveMode(bool on) override;
     void SetPreviewImage(std::unique_ptr<LvglImage> image) override;
     void SetTheme(Theme* theme) override;
+    Theme* GetTheme() override { return requested_theme_.load(); }
     void UpdateStatusBar(bool all = false) override;
     void SetTouchPoint(int count, int x, int y);
     void SetBatteryCallback(std::function<bool(int&, bool&, bool&)> callback) {
@@ -39,6 +40,10 @@ private:
         bool sleep = false;
     } pending_;
     std::mutex pending_mutex_;
+    std::unique_ptr<LvglImage> pending_preview_;
+    std::shared_ptr<LvglFont> pending_font_, rendered_font_;
+    bool preview_changed_ = false, theme_changed_ = false;
+    std::atomic<Theme*> requested_theme_{nullptr};
     std::atomic<bool> requested_{false};
     std::atomic<uint32_t> touch_{0};
     std::function<void()> wake_;
@@ -46,6 +51,8 @@ private:
     void Run();
     void CreateAvatar();
     void ApplyReaction(k151::Reaction previous, k151::Reaction current);
+    void ApplyPreview(std::unique_ptr<LvglImage> image, uint64_t now);
+    void ApplyFont(std::shared_ptr<LvglFont> font);
     k151::Model model_;
     int blink_ = -1, idle_motion_ = -1, idle_expression_ = -1, speaking_ = -1;
     int decoration_ = -1, blush_ = -1;
@@ -55,5 +62,5 @@ private:
     uint8_t idle_motion_level_ = 2;
     uint64_t shake_mouth_tick_ = 0;
     lv_obj_t* system_label_ = nullptr;
-    std::string speech_;
+    uint64_t preview_until_ = 0;
 };

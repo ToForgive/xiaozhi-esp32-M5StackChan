@@ -2,6 +2,7 @@
 #include "k151_application.h"
 #include "application.h"
 DeviceState K151DeviceState() { return Application::GetInstance().GetDeviceState(); }
+bool K151CanEnterSleepMode() { return Application::GetInstance().CanEnterSleepMode(); }
 void K151ToggleChat() {
     Application::GetInstance().Schedule([]() {
         auto& app = Application::GetInstance();

@@ -43,6 +43,7 @@ public:
     bool getWriteValue(uint8_t pin);
 
     void digitalWrite(uint8_t pin, bool level);
+    esp_err_t tryDigitalWrite(uint8_t pin, bool level);
 
     bool digitalRead(uint8_t pin);
 

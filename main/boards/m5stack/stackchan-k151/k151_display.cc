@@ -34,6 +34,7 @@ uint64_t Now() { return esp_timer_get_time() / 1000; }
 }  // namespace
 
 void K151Display::Start() {
+    requested_theme_.store(current_theme_);
     ESP_ERROR_CHECK(xTaskCreatePinnedToCore([](void* p) { static_cast<K151Display*>(p)->Run(); },
                                             "k151-avatar", 8192, this, 3, nullptr, 1) == pdPASS
                         ? ESP_OK
@@ -83,15 +84,9 @@ void K151Display::SetPowerSaveMode(bool on) {
     ++pending_.revision;
 }
 void K151Display::SetPreviewImage(std::unique_ptr<LvglImage> image) {
-    SpiLcdDisplay::SetPreviewImage(std::move(image));
-    DisplayLockGuard lock(this);
-    if (!lock)
-        return;
-    // Camera previews must not obscure activation, connection or error text.
-    for (auto label : {status_label_, notification_label_, system_label_}) {
-        if (label)
-            lv_obj_move_foreground(label);
-    }
+    std::lock_guard lock(pending_mutex_);
+    pending_preview_ = std::move(image);
+    preview_changed_ = true;
 }
 void K151Display::UpdateStatusBar(bool all) {
     // The worker renders a bounded status snapshot; callers never wait on animation.
@@ -100,19 +95,41 @@ void K151Display::UpdateStatusBar(bool all) {
 void K151Display::SetTheme(Theme* theme) {
     if (!theme)
         return;
-    DisplayLockGuard lock(this);
+    auto font = theme->GetTextFont();
+    std::lock_guard lock(pending_mutex_);
+    pending_font_ = std::move(font);
+    theme_changed_ = true;
+    // The application owns theme selection; the worker only consumes its font snapshot.
     current_theme_ = theme;
-    if (GetStackChan().hasAvatar()) {
-        auto font = theme->GetTextFont();
-        if (font) {
-            GetStackChan().avatar().setSpeechTextFont(const_cast<lv_font_t*>(font->font()));
-            for (auto label : {status_label_, notification_label_, system_label_}) {
-                if (label)
-                    lv_obj_set_style_text_font(label, font->font(), 0);
-            }
-        }
+    requested_theme_.store(theme);
+}
+void K151Display::ApplyFont(std::shared_ptr<LvglFont> font) {
+    const lv_font_t* face_font = font ? font->font() : &lv_font_montserrat_16;
+    GetStackChan().avatar().setSpeechTextFont(const_cast<lv_font_t*>(face_font));
+    for (auto label : {status_label_, notification_label_, system_label_}) {
+        if (label)
+            lv_obj_set_style_text_font(label, face_font, 0);
     }
-    // The official face remains white on black irrespective of chat theme.
+    // Keep the previous font alive until all styles have rebound, including delayed retries.
+    rendered_font_ = std::move(font);
+}
+void K151Display::ApplyPreview(std::unique_ptr<LvglImage> image, uint64_t now) {
+    // K151 owns this object; the default chat UI's emoji_box_/content_ never exist here.
+    if (!image || !image->image_dsc()->header.w || !image->image_dsc()->header.h) {
+        lv_obj_add_flag(preview_image_, LV_OBJ_FLAG_HIDDEN);
+        lv_image_set_src(preview_image_, nullptr);
+        preview_image_cached_.reset();
+        preview_until_ = 0;
+        return;
+    }
+    auto dsc = image->image_dsc();
+    lv_image_set_src(preview_image_, dsc);
+    const uint32_t scale = std::min(320u * 256 / dsc->header.w, 240u * 256 / dsc->header.h);
+    lv_image_set_scale(preview_image_, std::max<uint32_t>(1, scale));
+    lv_obj_remove_flag(preview_image_, LV_OBJ_FLAG_HIDDEN);
+    preview_image_cached_ = std::move(image);
+    preview_until_ = now + 10000;
+    // Labels were created after the preview and stay above it for activation/error text.
 }
 void K151Display::SetTouchPoint(int count, int x, int y) {
     if (count && x >= 0 && x < 320 && y >= 0 && y < 240)
@@ -124,7 +141,8 @@ void K151Display::SetTouchPoint(int count, int x, int y) {
 void K151Display::CreateAvatar() {
     auto& robot = GetStackChan();
     auto avatar = std::make_unique<DefaultAvatar>();
-    auto font = current_theme_->GetTextFont();
+    auto font = GetTheme()->GetTextFont();
+    rendered_font_ = font;
     avatar->init(lv_screen_active(), font ? font->font() : &lv_font_montserrat_16);
     avatar->getPanel()->onClick().connect([this]() {
         static uint32_t last_click = 0;
@@ -227,6 +245,9 @@ void K151Display::Run() {
     bool last_sleep = false;
     k151::Reaction applied_reaction = k151::Reaction::None;
     uint64_t last_status = 0;
+    std::unique_ptr<LvglImage> next_preview;
+    std::shared_ptr<LvglFont> next_font;
+    bool preview_dirty = false, font_dirty = false;
     while (true) {
         vTaskDelay(pdMS_TO_TICKS(20));
         if (!requested_.load())
@@ -235,6 +256,16 @@ void K151Display::Run() {
         {
             std::lock_guard lock(pending_mutex_);
             input = pending_;
+            if (preview_changed_) {
+                next_preview = std::move(pending_preview_);
+                preview_changed_ = false;
+                preview_dirty = true;
+            }
+            if (theme_changed_) {
+                next_font = pending_font_;
+                theme_changed_ = false;
+                font_dirty = true;
+            }
         }
         const auto state = K151DeviceState();
         const uint64_t now = Now();
@@ -268,6 +299,17 @@ void K151Display::Run() {
             GetHAL().requestSleep(input.sleep);
         if (!Lock(10))
             continue;
+        // Retain submitted images/fonts across lock failure; never mutate LVGL without the lock.
+        if (font_dirty) {
+            ApplyFont(std::move(next_font));
+            font_dirty = false;
+        }
+        if (preview_dirty) {
+            ApplyPreview(std::move(next_preview), now);
+            preview_dirty = false;
+        } else if (preview_until_ && now >= preview_until_) {
+            ApplyPreview(nullptr, now);
+        }
         auto& face = robot.avatar();
         // Sleep owns the motion lock even with no temporary reaction; wake must release it.
         if (applied_reaction != model_.GetReaction() || pet_refresh || input.sleep != last_sleep) {

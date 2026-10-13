@@ -14,6 +14,7 @@
 #include "drivers/PY32IOExpander_Class/PY32IOExpander_Class.hpp"
 #include "drivers/Si12T/Si12T.h"
 #include "drivers/bmi270/bmi270.h"
+#include "k151_sensor_cache.h"
 
 struct K151Config {
     uint32_t idleShutdownTimeSeconds = 0;  // New devices default to no automatic power-off.
@@ -40,7 +41,7 @@ public:
     void showRgbColor(uint8_t r, uint8_t g, uint8_t b);
     bool queueCommand(const K151Command& command);
     void requestServoPower(bool enabled) { queueCommand({K151Command::Power, enabled}); }
-    void DisableServoSupplyForShutdown();
+    bool DisableServoSupplyForShutdown();
     void requestSleep(bool sleeping) { sleep_requested_.store(sleeping ? 1 : 0); }
     bool servoAvailable() const { return servo_available_; }
     bool headTouchAvailable() const { return touch_ != nullptr; }
@@ -48,10 +49,18 @@ public:
     bool rtcAvailable() const { return bool(rtc_); }
     bool inaAvailable() const { return ina_ != nullptr; }
     bool ReadPower(float& volts, float& amps);
+    bool ReadRtc(std::string& calendar);
 
 private:
     void servo_init();
     void setServoPowerEnabled(bool enabled);
+    bool ReadPowerDevice(float& volts, float& amps);
+    struct PowerSample {
+        float volts, amps;
+    };
+    k151::SensorCache<PowerSample> power_cache_;
+    k151::SensorCache<std::string> rtc_cache_;
+    uint64_t telemetry_tick_ = 0;
     std::unique_ptr<m5::PY32IOExpander_Class> ioe_;
     std::unique_ptr<m5::PCF8563_Class> rtc_;
     std::unique_ptr<BMI270> imu_;
@@ -62,6 +71,7 @@ private:
     std::atomic<uint32_t> events_{0};
     std::atomic<int> sleep_requested_{-1};
     std::atomic<bool> shutting_down_{false};
+    std::atomic<int> supply_status_{0};  // 0 unknown, 1 off write ACK, 2 on write ACK.
     bool sleep_pending_ = false;
     uint64_t sleep_deadline_ = 0;
     uint32_t servo_ready_at_ = 0;

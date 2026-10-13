@@ -1,0 +1,8 @@
+test_actual_preview_and_theme_do_not_call_default_ui_or_wait_for_lvgl (test_k151_runtime.K151RuntimeTests.test_actual_preview_and_theme_do_not_call_default_ui_or_wait_for_lvgl) ... ok
+test_actual_telemetry_accessors_are_cached_and_expire (test_k151_runtime.K151RuntimeTests.test_actual_telemetry_accessors_are_cached_and_expire) ... ok
+test_sleep_owner_handles_concurrent_atomic_requests_and_deadlines (test_k151_runtime.K151RuntimeTests.test_sleep_owner_handles_concurrent_atomic_requests_and_deadlines) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.863s
+
+OK
